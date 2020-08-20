@@ -1,5 +1,5 @@
-use esp8266::GPIO;
 use esp8266_hal::gpio::*;
+use esp8266_hal::target::GPIO;
 use paste;
 
 // This macro is a helper for defining a `Pins` type within a board support
@@ -55,9 +55,9 @@ define_pins!(
     pin d5 = (gpio14, UnInitialized),
     /// Digital pin 6, MISO
     pin d6 = (gpio12, UnInitialized),
-    /// Digital pin 7, MOSI
+    /// Digital pin 7, MOSI, CTS
     pin d7 = (gpio13, UART),
-    /// Digital pin 8 (10k pull-down), SS
+    /// Digital pin 8 (10k pull-down), SS, RTS
     pin d8 = (gpio15, UART),
 
     /// UART receive pin

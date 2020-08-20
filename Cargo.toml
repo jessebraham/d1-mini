@@ -10,8 +10,7 @@ documentation = "https://docs.rs/d1-mini/"
 edition = "2018"
 
 [dependencies]
-esp8266 = "0.0.4"
-esp8266-hal = "0.1.0"
+esp8266-hal = { git = "https://github.com/esp-rs/esp8266-hal", rev = "49b23f461f5654622948595912678be6121d90e9" }
 paste = "1.0.0"
 
 [dev-dependencies]

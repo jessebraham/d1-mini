@@ -4,17 +4,15 @@
 use panic_halt as _;
 use xtensa_lx106_rt as _;
 
-use d1_mini::{esp8266, esp8266_hal, Pins};
-use esp8266::Peripherals;
-use esp8266_hal::ehal::digital::v2::{OutputPin, ToggleableOutputPin};
-use esp8266_hal::ehal::timer::CountDown;
-use esp8266_hal::timer::{Nanoseconds, TimerExt};
+use d1_mini::{hal, target, Pins};
+use hal::prelude::*;
+use hal::timer::Nanoseconds;
 
 const CORE_HZ: u32 = 80_000_000;
 
 #[no_mangle]
 fn main() -> ! {
-    let peripherals = unsafe { Peripherals::steal() };
+    let peripherals = unsafe { target::Peripherals::steal() };
     let pins = Pins::new(peripherals.GPIO);
 
     let mut led = pins.d4.into_push_pull_output();

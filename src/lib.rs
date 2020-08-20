@@ -5,8 +5,7 @@
 
 #![no_std]
 
-pub use esp8266;
-pub use esp8266_hal;
+pub use esp8266_hal::{self as hal, target};
 
 mod pins;
 pub use pins::Pins;
