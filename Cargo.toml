@@ -13,3 +13,20 @@ edition = "2018"
 esp8266 = "0.0.4"
 esp8266-hal = "0.1.0"
 paste = "1.0.0"
+
+[dev-dependencies]
+nb = "0.1.2"
+panic-halt = "0.2.0"
+xtensa-lx106-rt = { git = "https://github.com/icewind1991/xtensa-lx106-rt", rev = "2cc1e9b963ca2c2323a77562ad41ac620d8ae723" }
+
+[profile.dev]
+lto = true 
+incremental = false
+debug = false # debug adds frame pointers - which must be omitted
+codegen-units = 1
+
+[profile.release]
+lto = true
+incremental = false
+debug = false # debug adds frame pointers - which must be omitted
+codegen-units = 1
