@@ -8,9 +8,6 @@ use xtensa_lx106_rt as _;
 
 use d1_mini::{hal, target, Pins};
 use hal::prelude::*;
-use hal::timer::Nanoseconds;
-
-const CORE_HZ: u32 = 80_000_000;
 
 macro_rules! uprint {
     ($serial:expr, $($arg:tt)*) => {
@@ -32,8 +29,8 @@ fn main() -> ! {
     let peripherals = unsafe { target::Peripherals::steal() };
     let pins = Pins::new(peripherals.GPIO);
 
-    let (mut timer1, _) = peripherals.TIMER.timers(CORE_HZ);
-    timer1.start(Nanoseconds(1_000_000_000));
+    let (mut timer1, _) = peripherals.TIMER.timers(80u32.mhz());
+    timer1.start(1u32.s());
 
     // UART0 (txd, rxd) - read/write
     let mut uart0 = peripherals.UART0.serial(pins.tx, pins.rx);
