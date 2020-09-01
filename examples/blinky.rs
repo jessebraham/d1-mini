@@ -15,7 +15,7 @@ fn main() -> ! {
     let mut led = pins.d4.into_push_pull_output();
     led.set_high().unwrap();
 
-    let (mut timer1, _) = peripherals.TIMER.timers(80u32.mhz());
+    let (mut timer1, _) = peripherals.TIMER.timers();
     timer1.start(100u32.ms());
 
     loop {

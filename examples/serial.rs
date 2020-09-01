@@ -29,7 +29,7 @@ fn main() -> ! {
     let peripherals = unsafe { target::Peripherals::steal() };
     let pins = Pins::new(peripherals.GPIO);
 
-    let (mut timer1, _) = peripherals.TIMER.timers(80u32.mhz());
+    let (mut timer1, _) = peripherals.TIMER.timers();
     timer1.start(1u32.s());
 
     // UART0 (txd, rxd) - read/write

@@ -3,7 +3,8 @@ name = "d1-mini"
 version = "0.1.0"
 authors = ["Jesse Braham <jesse@beta7.io>"]
 description = "A Board Support Package (BSP) which provides a type-safe API for the WEMOS/LOLIN D1 mini"
-keywords = ["embedded-hal", "no-std", "xtensa"]
+categories = ["embedded", "hardware-support", "no-std"]
+keywords = ["embedded-hal", "esp8266", "no-std", "xtensa"]
 repository = "https://github.com/jessebraham/d1-mini"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
@@ -11,7 +12,7 @@ documentation = "https://docs.rs/d1-mini/"
 edition = "2018"
 
 [dependencies]
-esp8266-hal =  "0.2.0"
+esp8266-hal =  "0.3.2"
 paste = "1.0.0"
 
 [dev-dependencies]
@@ -20,7 +21,7 @@ panic-halt = "0.2.0"
 
 [dev-dependencies.xtensa-lx106-rt]
 git = "https://github.com/icewind1991/xtensa-lx106-rt"
-rev = "98cc73a6b073d50a5038b9c5602478be32c2cff7"
+rev = "22873ea73691319762f14846ad94e4228a43f2c2"
 
 [profile.dev]
 lto = true 
