@@ -18,7 +18,12 @@ You will need to use [xargo](https://github.com/japaric/xargo) or [cargo-xbuild]
 
 ### Build the Examples
 
-You can build all examples at once, or just build one at a time:
+To build the examples, you will need the `xtensa-lx106-elf-gcc` binary. This can either be downloaded from the [Espressiv][espressivdl] or you can install the [esp-open-sdk][espopensdk]. In either case, make sure that the binary is in your `$PATH`.
+
+[espressivdl]: https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain
+[espopensdk]: https://github.com/pfalcon/esp-open-sdk
+
+You can then build all examples at once, or just build one at a time:
 
 ```bash
 $ xargo build --release --examples
