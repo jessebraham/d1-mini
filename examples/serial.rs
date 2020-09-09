@@ -1,38 +1,22 @@
 #![no_std]
 #![no_main]
 
-use core::fmt::Write;
-
 use panic_halt as _;
-use xtensa_lx106_rt as _;
 
+use core::fmt::Write;
 use d1_mini::{hal, target, Pins};
 use hal::prelude::*;
+use xtensa_lx106_rt::entry;
 
-macro_rules! uprint {
-    ($serial:expr, $($arg:tt)*) => {
-        $serial.write_fmt(format_args!($($arg)*))
-    };
-}
-
-macro_rules! uprintln {
-    ($serial:expr, $fmt:expr) => {
-        uprint!($serial, concat!($fmt, "\r\n"))
-    };
-    ($serial:expr, $fmt:expr, $($arg:tt)*) => {
-        uprint!($serial, concat!($fmt, "\r\n"), $($arg)*)
-    };
-}
-
-#[no_mangle]
+#[entry]
 fn main() -> ! {
     let peripherals = unsafe { target::Peripherals::steal() };
     let pins = Pins::new(peripherals.GPIO);
 
     let (mut timer1, _) = peripherals.TIMER.timers();
-    timer1.start(1u32.s());
 
     // UART0 (txd, rxd) - read/write
+    // NOTE: also connected to the USB port via a CH340
     let mut uart0 = peripherals.UART0.serial(pins.tx, pins.rx);
 
     // UART1 (txd) - write-only
@@ -40,9 +24,9 @@ fn main() -> ! {
     let mut uart1 = peripherals.UART1.serial(txd);
 
     loop {
-        uprintln!(uart0, "foo bar baz").unwrap();
-        uprintln!(uart1, "spam ham eggs").unwrap();
+        uart0.write_str("foo bar baz\r\n").unwrap();
+        uart1.write_str("spam ham eggs\r\n").unwrap();
 
-        nb::block!(timer1.wait()).unwrap();
+        timer1.delay_ms(1_000);
     }
 }

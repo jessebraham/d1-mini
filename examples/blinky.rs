@@ -2,24 +2,23 @@
 #![no_main]
 
 use panic_halt as _;
-use xtensa_lx106_rt as _;
 
 use d1_mini::{hal, target, Pins};
 use hal::prelude::*;
+use xtensa_lx106_rt::entry;
 
-#[no_mangle]
+#[entry]
 fn main() -> ! {
     let peripherals = unsafe { target::Peripherals::steal() };
     let pins = Pins::new(peripherals.GPIO);
 
+    let (mut timer1, _) = peripherals.TIMER.timers();
+
     let mut led = pins.d4.into_push_pull_output();
     led.set_high().unwrap();
 
-    let (mut timer1, _) = peripherals.TIMER.timers();
-    timer1.start(100u32.ms());
-
     loop {
-        nb::block!(timer1.wait()).unwrap();
+        timer1.delay_ms(100);
         led.toggle().unwrap();
     }
 }
