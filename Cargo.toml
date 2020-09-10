@@ -12,11 +12,16 @@ documentation = "https://docs.rs/d1-mini/"
 edition = "2018"
 
 [dependencies]
+bitbang-hal = "0.3.2"
 esp8266-hal =  "0.3.2"
 paste = "1.0.0"
 
 [dev-dependencies]
 panic-halt = "0.2.0"
+
+[dev-dependencies.lis3dh]
+git = "https://github.com/BenBergman/lis3dh-rs"
+rev = "0bd78d8aaf197dba9a4570c2934bf222ca20562c"
 
 [dev-dependencies.xtensa-lx106-rt]
 git = "https://github.com/icewind1991/xtensa-lx106-rt"
