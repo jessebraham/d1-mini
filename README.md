@@ -19,18 +19,27 @@
 
 ## Getting Started
 
-Because the Xtensa target is not yet officially supported, you must build a custom version of Rust. For more information on this process, please refer the the [rust-xtensa] project's README. I've create a [Dockerfile] which handles setting up the environment for you, if you'd prefer that approach.
+__NOTE:__ This crate's dependencies are still in the early stages of development, and various features may be incomplete or missing altogether. With this being pre-`1.0` software, the public API is subject to change at any time.
 
-You will also need either [xargo] or [cargo-xbuild] to cross-compile your projects.
+### Prerequisites
+
+Because the Xtensa target is not officially supported, you must build a custom version of Rust. For more information on this process, please refer the the [rust-xtensa] project's README, which has detailed instructions for most popular operating systems.
+
+There are currently three viable options for cross-compilation:
+
+* [xargo] (_in maintenance mode_)
+* [cargo-xbuild]
+* `cargo` (_using the unstable `build-std` feature_)
+
+Select one (or more) from the above list, and ensure they are installed.
 
 [rust-xtensa]: https://github.com/MabezDev/rust-xtensa
-[Dockerfile]: https://github.com/jessebraham/docker-rust-esp
-[xargo]: https://github.com/japaric/xargo
 [cargo-xbuild]: https://github.com/rust-osdev/cargo-xbuild
+[xargo]: https://github.com/japaric/xargo
 
 ### Build the Examples
 
-To build the examples, you will need the Xtensa toolchain. You can download pre-built binaries from [Espressif][espressifdl], or build them yourself using [esp-open-sdk][espopensdk]. In either case, make sure that the resulting binaries are in your `$PATH`.
+To build the examples, you will need the Xtensa toolchain. You can download pre-built binaries from [Espressif], or build them yourself using [esp-open-sdk]. In either case, make sure that the resulting binaries are in your `$PATH`.
 
 You can then build all examples at once, or just build one at a time:
 
@@ -39,8 +48,8 @@ $ xargo build --release --examples
 $ xargo build --release --example=blinky
 ```
 
-[espressifdl]: https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain
-[espopensdk]: https://github.com/pfalcon/esp-open-sdk
+[Espressif]: https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain
+[esp-open-sdk]: https://github.com/pfalcon/esp-open-sdk
 
 ### Flash the Device
 
@@ -48,16 +57,22 @@ $ xargo build --release --example=blinky
 
 [espflash] is a community developed tool (written entirely in Rust) for flashing _ESP32-_ and _ESP8266-based_ devices. It provides a CLI tool for flashing the aforementioned devices as well as an additional crate, [cargo-espflash], which provides a cargo subcommand which compiles and flashes your device with one command.
 
+For more information on these tools, please refer to their respective `README`s.
+
+#### Examples
+
+Make sure you replace `<PORT>` with the appropriate value prior to running either of the below commands.
+
 Using `espflash`:
 
 ```bash
-$ espflash [--ram] <path to serial> <path to elf image>
+$ espflash <PORT> target/xtensa-esp8266-none/release/examples/blinky
 ```
 
 Using `cargo-espflash`:
 
 ```bash
-$ cargo espflash [--ram] [--release] [--example EXAMPLE] --chip {esp32,esp8266} <serial>
+$ cargo espflash --release --example=blinky --chip=esp8266 --tool=xargo <PORT>
 ```
 
 [espflash]: https://github.com/icewind1991/espflash
@@ -76,7 +91,7 @@ $ esptool.py \
 >   target/xtensa-esp8266-none/release/examples/blinky
 ```
 
-Then you're ready to flash the image to the device; make sure you replace `<PORT>` with the appropriate value prior to running the command.
+Then you're ready to flash the image to the device; make sure you replace `<PORT>` with the appropriate value prior to running the command:
 
 ```bash
 $ esptool.py \
