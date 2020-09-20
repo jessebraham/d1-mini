@@ -7,10 +7,10 @@
 
 mod pins;
 
-pub use bitbang_hal::i2c::I2cBB;
 pub use esp8266_hal::{self as hal, target};
 pub use pins::Pins;
 
+use bitbang_hal::i2c::I2cBB;
 use esp8266_hal::ehal::timer::{CountDown, Periodic};
 use esp8266_hal::gpio::*;
 use esp8266_hal::prelude::*;
@@ -18,9 +18,15 @@ use esp8266_hal::spi::{SPI1Master, SpiClock};
 use esp8266_hal::target::SPI1;
 
 /// Convenience function for setting up the D1/D2 pins to operate as I²C SCL/SDA
-/// respectively. Since the ESP8266 does not have any I²C hardware, we accomplish
-/// this using bitbang-hal.
-// https://github.com/sajattack/bitbang-hal
+/// respectively.
+///
+/// Since the ESP8266 does not have any I²C hardware, we accomplish this using
+/// [bitbang-hal]. The [official documentation] lists D1/D2 as SCL/SDA
+/// respectively, so by default we will use these pins, but you can use
+/// whichever you like in practice.
+///
+/// [bitbang-hal]: https://github.com/sajattack/bitbang-hal
+/// [official documentation]: https://docs.wemos.cc/en/latest/d1/d1_mini.html#pin
 pub fn i2c_master<TIM>(
     d1: Gpio5<Input<Floating>>,
     d2: Gpio4<Input<Floating>>,
@@ -29,9 +35,6 @@ pub fn i2c_master<TIM>(
 where
     TIM: CountDown + Periodic,
 {
-    // The official documentation for the board labels d1 and d2 as SCL and SDA
-    // respectively, despite the fact the ESP8266 has no actual I²C hardware; we'll
-    // use these pins regardless.
     let scl = d1.into_open_drain_output();
     let sda = d2.into_open_drain_output();
 
@@ -39,7 +42,7 @@ where
 }
 
 /// Convenience function for setting up the D5/D6/D7 pins to operate as SPI
-/// SCK/MISO/MOSI respectively.
+/// SCK/MISO/MOSI respectively, running at the provided frequency.
 pub fn spi_master(
     spi1: SPI1,
     d5: Gpio14<UnInitialized>,

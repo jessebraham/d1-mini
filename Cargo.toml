@@ -2,39 +2,42 @@
 name = "d1-mini"
 version = "0.1.0"
 authors = ["Jesse Braham <jesse@beta7.io>"]
+edition = "2018"
 description = "A Board Support Package (BSP) which provides a type-safe API for the WEMOS/LOLIN D1 mini"
-categories = ["embedded", "hardware-support", "no-std"]
-keywords = ["embedded-hal", "esp8266", "no-std", "xtensa"]
+documentation = "https://docs.rs/d1-mini/"
+readme = "README.md"
 repository = "https://github.com/jessebraham/d1-mini"
 license = "MIT OR Apache-2.0"
-readme = "README.md"
-documentation = "https://docs.rs/d1-mini/"
-edition = "2018"
+keywords = [
+    "embedded-hal",
+    "esp8266",
+    "no-std",
+    "xtensa"
+]
+categories = [
+    "embedded",
+    "hardware-support",
+    "no-std"
+]
 
 [dependencies]
-bitbang-hal = "0.3.2"
+bitbang-hal = "^0.3"
 esp8266-hal =  "0.3.2"
-paste = "1.0.0"
+paste = "^1.0"
 
 [dev-dependencies]
-panic-halt = "0.2.0"
+panic-halt = "^0.2"
 
 [dev-dependencies.lis3dh]
 git = "https://github.com/BenBergman/lis3dh-rs"
 rev = "0bd78d8aaf197dba9a4570c2934bf222ca20562c"
 
-[dev-dependencies.xtensa-lx106-rt]
-git = "https://github.com/icewind1991/xtensa-lx106-rt"
-rev = "22873ea73691319762f14846ad94e4228a43f2c2"
-
 [profile.dev]
-lto = true 
+lto = true
 incremental = false
-debug = false # debug adds frame pointers - which must be omitted
+debug = false # debug adds frame pointers, which must be omitted
 codegen-units = 1
 
 [profile.release]
 lto = true
-incremental = false
-debug = false # debug adds frame pointers - which must be omitted
 codegen-units = 1

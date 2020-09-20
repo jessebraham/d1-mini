@@ -14,7 +14,7 @@ macro_rules! define_pins {
     ) => {
 
 paste::item! {
-    /// Map labelled pin names to their physical pins
+    /// Maps labelled pin names to their physical pins.
     pub struct Pins {
         $(
             $(#[$attr])*
@@ -24,7 +24,7 @@ paste::item! {
 }
 
 impl Pins {
-    /// Returns the pins for the device
+    /// Returns the pins for the device.
     pub fn new(gpio: GPIO) -> Self {
         let pins = gpio.split();
 
@@ -37,11 +37,6 @@ impl Pins {
     };
 }
 
-// FIXME: the `a0` and `d0` pins mappings are missing, as they are not
-//        currently available in the PAC/HAL; these will need to be added
-//        whenever possible.
-// FIXME: can the `rst` pin be used for other functions? if so, it needs to be
-//        added below as well.
 define_pins!(
     /// Digital pin 1, SCL
     pin d1 = (gpio5, Input<Floating>),
