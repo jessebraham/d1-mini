@@ -5,11 +5,10 @@ use panic_halt as _;
 
 use d1_mini::{hal, target, Pins};
 use hal::prelude::*;
-use xtensa_lx106_rt::entry;
 
 #[entry]
 fn main() -> ! {
-    let peripherals = unsafe { target::Peripherals::steal() };
+    let peripherals = target::Peripherals::take().unwrap();
     let pins = Pins::new(peripherals.GPIO);
 
     let (mut timer1, _) = peripherals.TIMER.timers();

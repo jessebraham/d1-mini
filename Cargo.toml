@@ -22,7 +22,7 @@ categories = [
 
 [dependencies]
 bitbang-hal = "^0.3"
-esp8266-hal =  "0.3.2"
+esp8266-hal = "^0.4"
 paste = "^1.0"
 
 [dev-dependencies]

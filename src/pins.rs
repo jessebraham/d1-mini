@@ -38,6 +38,8 @@ impl Pins {
 }
 
 define_pins!(
+    /// Digital pin 0
+    pin d0 = (gpio16, Input<Floating>),
     /// Digital pin 1, SCL
     pin d1 = (gpio5, Input<Floating>),
     /// Digital pin 2, SDA

@@ -5,11 +5,10 @@ use core::fmt::Write;
 
 use panic_halt as _;
 
-use d1_mini::{hal, target, Pins};
+use d1_mini::{hal, i2c_master, target, Pins};
 use hal::prelude::*;
 use lis3dh::accelerometer::{RawAccelerometer, Tracker};
 use lis3dh::{Lis3dh, Range, SlaveAddr};
-use xtensa_lx106_rt::entry;
 
 macro_rules! uprint {
     ($serial:expr, $($arg:tt)*) => {
@@ -28,7 +27,7 @@ macro_rules! uprintln {
 
 #[entry]
 fn main() -> ! {
-    let peripherals = unsafe { target::Peripherals::steal() };
+    let peripherals = target::Peripherals::take().unwrap();
     let pins = Pins::new(peripherals.GPIO);
 
     let (timer1, mut timer2) = peripherals.TIMER.timers();
@@ -37,7 +36,7 @@ fn main() -> ! {
     // The `i2c_master` helper function assumes that d1 and d2 are being used for
     // SCL and SDA respectively. If you would like to use other GPIOs instead, the
     // `I2cBB` struct from bitbang-hal has been re-exported as well.
-    let i2c = d1_mini::i2c_master(pins.d1, pins.d2, timer1);
+    let i2c = i2c_master(pins.d1, pins.d2, timer1);
     let mut lis3dh = Lis3dh::new(i2c, SlaveAddr::Default).unwrap();
     lis3dh.set_range(Range::G8).unwrap();
 
