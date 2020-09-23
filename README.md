@@ -15,7 +15,8 @@
 * [LOLIN D1 mini official documentation](https://docs.wemos.cc/en/latest/d1/d1_mini.html)
 * [esp8266-hal](https://github.com/esp-rs/esp8266-hal)
 * [esp8266](https://github.com/esp-rs/esp8266)
-* [xtensa-lx106-rt](https://github.com/icewind1991/xtensa-lx106-rt)
+* [xtensa-lx-rt](https://github.com/esp-rs/xtensa-lx-rt)
+* [xtensa-lx](https://github.com/esp-rs/xtensa-lx)
 
 ## Getting Started
 
