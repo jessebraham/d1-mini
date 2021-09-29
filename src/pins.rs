@@ -1,5 +1,4 @@
-use esp8266_hal::gpio::*;
-use esp8266_hal::target::GPIO;
+use esp8266_hal::{gpio::*, target::GPIO};
 use paste;
 
 // This macro is a helper for defining a `Pins` type within a board support

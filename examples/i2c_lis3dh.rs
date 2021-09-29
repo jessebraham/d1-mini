@@ -7,8 +7,12 @@ use panic_halt as _;
 
 use d1_mini::{hal, i2c_master, target, Pins};
 use hal::prelude::*;
-use lis3dh::accelerometer::{RawAccelerometer, Tracker};
-use lis3dh::{Lis3dh, Range, SlaveAddr};
+use lis3dh::{
+    accelerometer::{RawAccelerometer, Tracker},
+    Lis3dh,
+    Range,
+    SlaveAddr,
+};
 
 macro_rules! uprint {
     ($serial:expr, $($arg:tt)*) => {

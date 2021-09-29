@@ -1,2 +1,4 @@
 edition = "2018"
+imports_granularity = "Crate"
+imports_layout = "HorizontalVertical"
 wrap_comments = true

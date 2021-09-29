@@ -11,11 +11,13 @@ pub use esp8266_hal::{self as hal, target};
 pub use pins::Pins;
 
 use bitbang_hal::i2c::I2cBB;
-use esp8266_hal::ehal::timer::{CountDown, Periodic};
-use esp8266_hal::gpio::*;
-use esp8266_hal::prelude::*;
-use esp8266_hal::spi::{SPI1Master, SpiClock};
-use esp8266_hal::target::SPI1;
+use esp8266_hal::{
+    ehal::timer::{CountDown, Periodic},
+    gpio::*,
+    prelude::*,
+    spi::{SPI1Master, SpiClock},
+    target::SPI1,
+};
 
 /// Convenience function for setting up the D1/D2 pins to operate as I²C SCL/SDA
 /// respectively.
