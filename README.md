@@ -8,49 +8,39 @@
 
 ## [Documentation]
 
-[Documentation]: https://docs.rs/d1-mini/
+[documentation]: https://docs.rs/d1-mini/
 
 ## Resources
 
-* [LOLIN D1 mini official documentation](https://docs.wemos.cc/en/latest/d1/d1_mini.html)
-* [esp8266-hal](https://github.com/esp-rs/esp8266-hal)
-* [esp8266](https://github.com/esp-rs/esp8266)
-* [xtensa-lx-rt](https://github.com/esp-rs/xtensa-lx-rt)
-* [xtensa-lx](https://github.com/esp-rs/xtensa-lx)
+- [LOLIN D1 mini official documentation](https://docs.wemos.cc/en/latest/d1/d1_mini.html)
+- [esp8266-hal](https://github.com/esp-rs/esp8266-hal)
+- [esp8266](https://github.com/esp-rs/esp8266)
+- [xtensa-lx-rt](https://github.com/esp-rs/xtensa-lx-rt)
+- [xtensa-lx](https://github.com/esp-rs/xtensa-lx)
 
 ## Getting Started
 
-__NOTE:__ This crate's dependencies are still in the early stages of development, and various features may be incomplete or missing altogether. With this being pre-`1.0` software, the public API is subject to change at any time.
+**NOTE:** This crate's dependencies are still in the early stages of development, and various features may be incomplete or missing altogether. With this being pre-`1.0` software, the public API is subject to change at any time.
 
 ### Prerequisites
 
-Because the Xtensa target is not officially supported, you must build a custom version of Rust. For more information on this process, please refer the the [rust-xtensa] project's README, which has detailed instructions for most popular operating systems.
+Because the Xtensa target is not officially supported, you must use a custom fork of Rust. Pre-built artifacts for common operating systems are available via the [esp-rs/rust-build] repository's releases page. Alternatively, you can build the compiler from source; for more information on this process, please refer the the [esp-rs/rust] fork's README, which has detailed instructions for most popular operating systems.
 
-There are currently three viable options for cross-compilation:
+You will additionally need the appropriate Xtensa toolchain. You can download pre-built binaries from [Espressif], or build them yourself using [esp-open-sdk]. In either case, make sure that the resulting binaries are in your `$PATH`.
 
-* [xargo] (_in maintenance mode_)
-* [cargo-xbuild]
-* `cargo` (_using the unstable `build-std` feature_)
-
-Select one (or more) from the above list, and ensure they are installed.
-
-[rust-xtensa]: https://github.com/MabezDev/rust-xtensa
-[cargo-xbuild]: https://github.com/rust-osdev/cargo-xbuild
-[xargo]: https://github.com/japaric/xargo
+[esp-rs/rust]: https://github.com/MabezDev/rust-xtensa
+[esp-rs/rust-build]: https://github.com/MabezDev/rust-build
+[espressif]: https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain
+[esp-open-sdk]: https://github.com/pfalcon/esp-open-sdk
 
 ### Build the Examples
 
-To build the examples, you will need the Xtensa toolchain. You can download pre-built binaries from [Espressif], or build them yourself using [esp-open-sdk]. In either case, make sure that the resulting binaries are in your `$PATH`.
-
-You can then build all examples at once, or just build one at a time:
+You can build all examples at once, or just build one at a time:
 
 ```bash
-$ xargo build --release --examples
-$ xargo build --release --example=blinky
+$ cargo build --release --examples
+$ cargo build --release --example=blinky
 ```
-
-[Espressif]: https://docs.espressif.com/projects/esp8266-rtos-sdk/en/latest/get-started/index.html#setup-toolchain
-[esp-open-sdk]: https://github.com/pfalcon/esp-open-sdk
 
 ### Flash the Device
 
@@ -73,11 +63,11 @@ $ espflash <PORT> target/xtensa-esp8266-none/release/examples/blinky
 Using `cargo-espflash`:
 
 ```bash
-$ cargo espflash --release --example=blinky --chip=esp8266 --tool=xargo <PORT>
+$ cargo espflash --release --example=blinky <PORT>
 ```
 
-[espflash]: https://github.com/icewind1991/espflash
-[cargo-espflash]: https://github.com/icewind1991/espflash/tree/master/cargo-espflash
+[espflash]: https://github.com/esp-rs/espflash
+[cargo-espflash]: https://github.com/esp-rs/espflash/tree/master/cargo-espflash
 
 ### esptool
 
@@ -110,8 +100,8 @@ $ esptool.py \
 
 Licensed under either of:
 
-* Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-* MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.
 
