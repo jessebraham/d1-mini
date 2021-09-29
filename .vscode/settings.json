@@ -1,0 +1,6 @@
+{
+    "editor.formatOnSave": true,
+
+    "rust-analyzer.cargo.target": "xtensa-esp8266-none-elf",
+    "rust-analyzer.checkOnSave.allTargets": false
+}

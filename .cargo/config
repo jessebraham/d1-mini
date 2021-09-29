@@ -1,12 +1,12 @@
-[target.xtensa-esp8266-none]
+[target.xtensa-esp8266-none-elf]
 runner = "xtensa-lx106-elf-gdb"
 
 [build]
 rustflags = [
   "-C", "link-arg=-nostartfiles",
-  "-C", "debuginfo=0", # not 2
   "-C", "link-arg=-Wl,-Tlink.x",
-  # see: https://github.com/MabezDev/xtensa-rust-quickstart/issues/1#issuecomment-481119695
-  "--emit", "llvm-bc,link",
 ]
 target = "xtensa-esp8266-none-elf"
+
+[unstable]
+build-std = ["core"]

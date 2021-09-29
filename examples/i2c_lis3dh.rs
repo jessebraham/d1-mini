@@ -37,7 +37,7 @@ fn main() -> ! {
     // SCL and SDA respectively. If you would like to use other GPIOs instead, the
     // `I2cBB` struct from bitbang-hal has been re-exported as well.
     let i2c = i2c_master(pins.d1, pins.d2, timer1);
-    let mut lis3dh = Lis3dh::new(i2c, SlaveAddr::Default).unwrap();
+    let mut lis3dh = Lis3dh::new_i2c(i2c, SlaveAddr::Default).unwrap();
     lis3dh.set_range(Range::G8).unwrap();
 
     // The value passed into Tracker's `new` function was obtained experimentally.

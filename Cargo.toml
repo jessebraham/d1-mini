@@ -21,23 +21,17 @@ categories = [
 ]
 
 [dependencies]
-bitbang-hal = "^0.3"
-esp8266-hal = "^0.4"
-paste = "^1.0"
+bitbang-hal = "0.3"
+esp8266-hal = "0.5"
+paste = "1.0"
 
 [dev-dependencies]
-panic-halt = "^0.2"
-
-[dev-dependencies.lis3dh]
-git = "https://github.com/BenBergman/lis3dh-rs"
-rev = "0bd78d8aaf197dba9a4570c2934bf222ca20562c"
+lis3dh = "0.4"
+panic-halt = "0.2"
 
 [profile.dev]
-lto = true
-incremental = false
-debug = false # debug adds frame pointers, which must be omitted
-codegen-units = 1
+lto = false
+opt-level = 1
 
 [profile.release]
-lto = true
-codegen-units = 1
+lto = false
